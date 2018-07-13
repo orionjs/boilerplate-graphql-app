@@ -2,11 +2,6 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "react-native-scripts": "1.14.0",
-    "jest-expo": "~27.0.0",
-    "react-test-renderer": "16.3.1"
-  },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
     "start": "react-native-scripts start",
@@ -19,8 +14,22 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@orion-js/graphql-client": "^0.3.1",
+    "@orion-js/schema": "^0.5.8",
+    "autobind-decorator": "^2.1.0",
     "expo": "^27.0.1",
     "react": "16.3.1",
-    "react-native": "~0.55.2"
+    "react-apollo": "^2.1.9",
+    "react-apollo-decorators": "^2.0.0",
+    "react-native": "~0.55.2",
+    "react-native-modalbox": "^1.6.0",
+    "react-native-progress": "^3.5.0"
+  },
+  "devDependencies": {
+    "babel-plugin-module-resolver": "^3.1.1",
+    "eslint-config-orionsoft": "^1.2.8",
+    "jest-expo": "~27.0.0",
+    "react-native-scripts": "1.14.0",
+    "react-test-renderer": "16.3.1"
   }
 }
