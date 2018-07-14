@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {ApolloProvider} from 'react-apollo'
 import {client, recoverSession} from './client'
+import {AppLoading} from 'expo'
 import './decorators'
+import loadData from '../loadData'
 
 export default class Root extends React.Component {
   static propTypes = {
@@ -11,18 +13,19 @@ export default class Root extends React.Component {
 
   state = {loaded: false}
 
-  componentDidMount() {
-    this.load()
-  }
-
   async load() {
-    if (this.state.loaded) return
     await recoverSession()
-    this.setState({loaded: true})
+    await loadData()
   }
 
   renderLoading() {
-    return null
+    return (
+      <AppLoading
+        startAsync={this.load}
+        onFinish={() => this.setState({loaded: true})}
+        onError={console.warn}
+      />
+    )
   }
 
   render() {

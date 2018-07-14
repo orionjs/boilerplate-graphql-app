@@ -3,8 +3,9 @@ import url from './url'
 import {AsyncStorage} from 'react-native'
 
 let session = null
+let client = null
 
-export const recoverSession = async () => {
+const recoverSession = async () => {
   try {
     const json = await AsyncStorage.getItem('@orionjsapp:session')
     session = JSON.parse(json)
@@ -13,16 +14,21 @@ export const recoverSession = async () => {
   }
 }
 
-export const getSession = () => {
+const getSession = () => {
   return session
 }
 
-export const client = createClient({
+const saveSession = async newSession => {
+  session = newSession
+  await AsyncStorage.setItem('@orionjsapp:session', JSON.stringify(session, null, 2))
+  await client.resetStore()
+}
+
+client = createClient({
   endpointURL: url,
   useSubscriptions: false,
-  async saveSession(newSession) {
-    session = newSession
-    await AsyncStorage.setItem('@orionjsapp:session', JSON.stringify(session, null, 2))
-  },
+  saveSession,
   getSession
 })
+
+export {getSession, saveSession, recoverSession, client}

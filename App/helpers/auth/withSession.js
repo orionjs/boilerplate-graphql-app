@@ -1,11 +1,11 @@
 import React from 'react'
-import {getSession} from '../../Root/client'
+import {getSession, client} from '../../Root/client'
 import autobind from 'autobind-decorator'
 
 export default function(ComposedComponent) {
   class WithSession extends React.Component {
     componentDidMount() {
-      global.apolloClient.onResetStore(this.onResetStore)
+      client.onResetStore(this.onResetStore)
     }
 
     @autobind

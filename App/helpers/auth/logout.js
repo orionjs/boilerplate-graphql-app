@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import setSession from './setSession'
+import saveSession from './saveSession'
 
 const logout = async function() {
   await global.apolloClient.mutate({
@@ -9,7 +9,7 @@ const logout = async function() {
       }
     `
   })
-  await setSession(null)
+  await saveSession(null)
 }
 
 global.logout = logout
