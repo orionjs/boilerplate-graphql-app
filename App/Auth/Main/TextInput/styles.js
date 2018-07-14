@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native'
+import {iOSUIKit, iOSColors} from 'react-native-typography'
 
 export default StyleSheet.create({
   container: {
@@ -7,9 +8,8 @@ export default StyleSheet.create({
     marginBottom: 20
   },
   label: {
-    color: '#999',
-    letterSpacing: 2,
-    fontSize: 12
+    ...iOSUIKit.caption2Object,
+    color: iOSColors.gray
   },
   input: {
     paddingTop: 10,

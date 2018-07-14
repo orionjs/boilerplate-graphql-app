@@ -1,7 +1,9 @@
+import {iOSUIKit, iOSColors} from 'react-native-typography'
+
 export default {
   title: {
-    fontSize: 36,
-    fontWeight: '800'
+    ...iOSUIKit.largeTitleEmphasizedObject,
+    color: iOSColors.black
   },
   titleContainer: {
     padding: 10,
