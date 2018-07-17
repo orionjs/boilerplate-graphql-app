@@ -7,9 +7,7 @@ export default class AppRoot extends React.Component {
   render() {
     return (
       <Root>
-        <Auth forceLogin>
-          <App />
-        </Auth>
+        <Auth forceLogin app={App} />
       </Root>
     )
   }

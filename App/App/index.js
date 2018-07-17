@@ -1,34 +1,35 @@
 import React from 'react'
-import {Text, View} from 'react-native'
-import styles from './styles'
-import withGraphQL from 'react-apollo-decorators/lib/withGraphQL'
-import gql from 'graphql-tag'
-import forceLogin from 'App/helpers/auth/forceLogin'
-import logout from 'App/helpers/auth/logout'
-import PropTypes from 'prop-types'
-import LightButton from 'App/components/LightButton'
+import Home from './Home'
+import {createBottomTabNavigator} from 'react-navigation'
+import {Ionicons} from '@expo/vector-icons'
+import More from './More'
 
-@forceLogin
-@withGraphQL(gql`
-  query getMe {
-    me {
-      _id
-      email
+export default createBottomTabNavigator(
+  {
+    Home: Home,
+    More: More
+  },
+  {
+    initialRouteName: 'Home',
+    navigationOptions: ({navigation}) => ({
+      // eslint-disable-next-line
+      tabBarIcon: ({focused, tintColor}) => {
+        const {routeName} = navigation.state
+        let iconName
+        if (routeName === 'Home') {
+          iconName = `ios-home${focused ? '' : '-outline'}`
+        } else if (routeName === 'More') {
+          iconName = `ios-person${focused ? '' : '-outline'}`
+        }
+        return <Ionicons name={iconName} size={28} color={tintColor} />
+      }
+    }),
+    tabBarOptions: {
+      activeTintColor: '#0069ff',
+      inactiveTintColor: 'gray',
+      style: {
+        backgroundColor: '#fff'
+      }
     }
   }
-`)
-export default class App extends React.Component {
-  static propTypes = {
-    me: PropTypes.object
-  }
-
-  render() {
-    if (!this.props.me) return null
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>{this.props.me.email}, Welcome to Orionjs app</Text>
-        <LightButton onPress={() => logout()} title="Logout" />
-      </View>
-    )
-  }
-}
+)

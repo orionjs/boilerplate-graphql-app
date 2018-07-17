@@ -8,5 +8,8 @@ export default {
   titleContainer: {
     padding: 10,
     marginTop: 30
+  },
+  body: {
+    ...iOSUIKit.bodyObject
   }
 }

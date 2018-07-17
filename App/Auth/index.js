@@ -1,6 +1,4 @@
 import React from 'react'
-import {View} from 'react-native'
-import styles from './styles.js'
 import PropTypes from 'prop-types'
 import Main from './Main'
 import {client, getSession} from 'App/Root/client'
@@ -9,7 +7,7 @@ import SessionContext from 'App/helpers/auth/SessionContext'
 
 export default class Auth extends React.Component {
   static propTypes = {
-    children: PropTypes.object
+    app: PropTypes.any
   }
 
   constructor(props) {
@@ -33,7 +31,8 @@ export default class Auth extends React.Component {
 
   renderChildren() {
     if (!this.state.session.userId) return
-    return this.props.children
+    const App = this.props.app
+    return <App key={this.state.session.publicKey || 'loggedout'} />
   }
 
   renderLogin() {
@@ -44,10 +43,8 @@ export default class Auth extends React.Component {
   render() {
     return (
       <SessionContext.Provider value={this.state.session}>
-        <View style={styles.container}>
-          {this.renderChildren()}
-          {this.renderLogin()}
-        </View>
+        {this.renderChildren()}
+        {this.renderLogin()}
       </SessionContext.Provider>
     )
   }
