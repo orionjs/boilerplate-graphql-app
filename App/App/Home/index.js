@@ -21,7 +21,6 @@ export default class Home extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <View style={styles.container}>
         <Text style={styles.text}>{this.props.me.email}, Welcome to Orionjs app</Text>
