@@ -25,7 +25,6 @@ export default class Auth extends React.Component {
           visible={this.state.opened === 'password'}
           onRequestClose={() => {
             this.setState({opened: null})
-            alert('Modal has been closed.')
           }}>
           <Password open={this.open} />
         </Modal>

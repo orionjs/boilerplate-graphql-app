@@ -12,6 +12,7 @@ export default StyleSheet.create({
     color: iOSColors.gray
   },
   input: {
+    ...iOSUIKit.bodyObject,
     paddingTop: 10,
     paddingBottom: 10
   }

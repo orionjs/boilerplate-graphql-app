@@ -52,8 +52,8 @@ export default class Login extends React.Component {
       const errorMessage = error.message.replace('GraphQL error: ', '')
       this.setState({errorMessage})
       console.log('Error:', error)
+      this.setState({loading: false})
     }
-    this.setState({loading: false})
   }
 
   renderErrorMessage() {

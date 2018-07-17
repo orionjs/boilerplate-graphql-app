@@ -1,28 +1,54 @@
 import React from 'react'
-import {View, Modal} from 'react-native'
+import {View} from 'react-native'
 import styles from './styles.js'
 import PropTypes from 'prop-types'
-import withUserId from 'App/helpers/auth/withUserId'
 import Main from './Main'
+import {client, getSession} from 'App/Root/client'
+import autobind from 'autobind-decorator'
+import SessionContext from 'App/helpers/auth/SessionContext'
 
-@withUserId
 export default class Auth extends React.Component {
   static propTypes = {
-    children: PropTypes.object,
-    userId: PropTypes.string
+    children: PropTypes.object
+  }
+
+  constructor(props) {
+    super(props)
+    const session = getSession() || {}
+    this.state = {session}
+    this.initialUserId = session.userId
+  }
+
+  componentDidMount() {
+    client.onResetStore(this.onResetStore)
+  }
+
+  @autobind
+  onResetStore() {
+    try {
+      const session = getSession() || {}
+      this.setState({session})
+    } catch (e) {}
+  }
+
+  renderChildren() {
+    if (!this.state.session.userId) return
+    return this.props.children
+  }
+
+  renderLogin() {
+    if (this.state.session.userId) return
+    return <Main />
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        {this.props.children}
-        <Modal
-          animationType={this.props.userId ? 'slide' : 'none'}
-          visible={!this.props.userId}
-          onRequestClose={() => {}}>
-          <Main />
-        </Modal>
-      </View>
+      <SessionContext.Provider value={this.state.session}>
+        <View style={styles.container}>
+          {this.renderChildren()}
+          {this.renderLogin()}
+        </View>
+      </SessionContext.Provider>
     )
   }
 }
