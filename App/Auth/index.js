@@ -1,9 +1,8 @@
 import React from 'react'
-import {View} from 'react-native'
+import {View, Modal} from 'react-native'
 import styles from './styles.js'
 import PropTypes from 'prop-types'
 import withUserId from 'App/helpers/auth/withUserId'
-import Modal from 'react-native-modalbox'
 import Main from './Main'
 
 @withUserId
@@ -18,10 +17,9 @@ export default class Auth extends React.Component {
       <View style={styles.container}>
         {this.props.children}
         <Modal
-          swipeToClose={false}
-          startOpen={!this.props.userId}
-          isOpen={!this.props.userId}
-          position="bottom">
+          animationType={this.props.userId ? 'slide' : 'none'}
+          visible={!this.props.userId}
+          onRequestClose={() => {}}>
           <Main />
         </Modal>
       </View>

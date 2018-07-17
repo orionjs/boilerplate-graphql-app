@@ -1,5 +1,5 @@
 import React from 'react'
-import {View} from 'react-native'
+import {View, ScrollView, StatusBar} from 'react-native'
 import styles from './styles.js'
 import Swiper from 'react-native-swiper'
 import Login from './Login'
@@ -24,6 +24,7 @@ export default class Password extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar barStyle="dark-content" />
         <IconButton
           onPress={() => this.props.open(null)}
           name="close"
@@ -36,15 +37,15 @@ export default class Password extends React.Component {
           index={this.state.index}
           onIndexChanged={index => this.setState({index})}
           style={styles.wrapper}>
-          <View style={styles.forgot}>
+          <ScrollView style={styles.forgot} contentContainerStyle={styles.innerContent}>
             <Forgot open={this.open} />
-          </View>
-          <View style={styles.login}>
+          </ScrollView>
+          <ScrollView style={styles.login} contentContainerStyle={styles.innerContent}>
             <Login open={this.open} />
-          </View>
-          <View style={styles.register}>
+          </ScrollView>
+          <ScrollView style={styles.register} contentContainerStyle={styles.innerContent}>
             <Register open={this.open} />
-          </View>
+          </ScrollView>
         </Swiper>
       </View>
     )

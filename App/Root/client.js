@@ -1,5 +1,5 @@
 import {createClient} from '@orion-js/graphql-client'
-import url from './url'
+import url from '../url'
 import {AsyncStorage} from 'react-native'
 
 let session = null
