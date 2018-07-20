@@ -1,5 +1,5 @@
 const urls = {
-  local: `http://192.168.1.101:3000`,
+  local: `http://192.168.0.27:3000`,
   dev: '',
   prod: ''
 }
